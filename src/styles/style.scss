@@ -1,0 +1,434 @@
+@mixin sp-layout {
+    @media screen and (max-width: 750px) {
+        @content;
+    }
+}
+
+html {
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+    z-index: -1;
+    height: 100%;
+    margin: 0;
+}
+
+.background-stars {
+    z-index: 100;
+}
+
+@function random_range($min, $max) {
+    $rand: random();
+    $random_range: $min + floor($rand * (($max - $min) + 1));
+    @return $random_range;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
+    z-index: -1;
+}
+
+.star {
+    $star-count: 20;
+    --star-color: var(--primary-color);
+    --star-tail-length: 6em;
+    --star-tail-height: 2px;
+    --star-width: calc(var(--star-tail-length) / 6);
+    --fall-duration: 15s;
+    --tail-fade-duration: var(--fall-duration);
+
+    position: absolute;
+    top: var(--top-offset);
+    left: 10em;
+    width: var(--star-tail-length);
+    height: var(--star-tail-height);
+    color: var(--star-color);
+    background: linear-gradient(45deg, #ffb700, #ffb700);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px #ffb700);
+    transform: translate3d(104em, 0, 0);
+    animation:
+        fall var(--fall-duration) var(--fall-delay) linear infinite,
+        tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+
+    @include sp-layout {
+        // For mobile performance, tail-fade animation will be removed QAQ
+        animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+    }
+
+    @for $i from 1 through $star-count {
+        &:nth-child(#{$i}) {
+            --star-tail-length: #{random_range(500em, 750em) / 100};
+            --top-offset: #{random_range(0vh, 10000vh) / 100};
+            --fall-duration: #{random_range(6000, 12000s) / 500};
+            --fall-delay: #{random_range(0, 10000s) / 1000};
+        }
+    }
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: calc(var(--star-width) / -2);
+        width: var(--star-width);
+        height: 100%;
+        background: linear-gradient(45deg, #ffb700, #ffb700, #ffb700);
+        border-radius: inherit;
+        animation: blink 2s linear infinite;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes fall {
+    to {
+        transform: translate3d(-30em, 0, 0);
+    }
+}
+
+@keyframes tail-fade {
+    0%,
+    50% {
+        width: var(--star-tail-length);
+        opacity: 1;
+    }
+
+    70%,
+    80% {
+        width: 0;
+        opacity: 0.4;
+    }
+
+    100% {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0px;
+    width: 50%;
+    padding: 50px;
+    z-index: 9999;
+}
+
+nav {
+    background: #070f19;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    border-bottom: 4px groove #d29000;
+    border-radius: 40px;
+}
+
+.title {
+    width: 25%;
+    font:
+        bold 1.3em Impact,
+        Charcoal,
+        sans-serif;
+    font-style: italic;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.title h1 {
+    line-height: 40px;
+    text-shadow: 3px 3px 0px #000000;
+}
+
+.title img {
+    width: 20%;
+    padding-right: 13px;
+}
+
+.title span {
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 6px #fcaa00 solid;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    height: 12vh;
+}
+
+nav ul {
+    width: 50%;
+    margin: 0;
+    display: flex;
+    list-style: none;
+
+    justify-content: center;
+    text-align: center;
+    align-items: flex-end;
+    padding: 0;
+}
+
+nav li {
+    width: 30%;
+    display: flex;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+
+    backdrop-filter: blur(5.7px);
+    margin: 0;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+nav a {
+    width: 100%;
+    font-family: Verdana;
+    align-items: center;
+    text-align: center;
+    font-size: 0.7em;
+
+    float: left;
+    display: block;
+    color: #fff;
+    padding: 6px 10px 5px 10px;
+    text-decoration: none;
+
+    line-height: 1.5em;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background: black;
+    color: #ffb700;
+    transition: 0.2s;
+    font-size: 0.9em;
+}
+
+.nav__contacts {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.3em;
+    font: bold 0.7em Roboto;
+    color: #eea100;
+    text-shadow: 2px 1px 0px #000000;
+    align-items: center;
+}
+
+.nav__contacts p {
+    margin: 0;
+    padding: 0;
+}
+
+.main__content {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.7px);
+    box-sizing: border-box;
+    display: grid;
+    margin: auto;
+    align-items: center;
+    flex: 1 1 auto;
+}
+
+.vertical-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main__content h2 {
+    margin-top: 0;
+    color: #46574d;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+.mb-content {
+    margin-bottom: 0.83em;
+}
+
+.main__content p {
+    font-family: Roboto;
+    font-size: 0.95em;
+    margin: 0 0 0px 0;
+    line-height: 2em;
+    color: rgb(223, 145, 0);
+}
+
+.info {
+    text-align: center;
+}
+
+.main__content strong {
+    font-size: 1.2em;
+}
+
+.main__content a {
+    color: #46574d;
+    font:
+        bold 0.8em Arial,
+        sans-serif;
+    line-height: 1.5em;
+
+    text-decoration: none;
+    color: #00194b;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(15, 122, 252, 0.2);
+    transition: 0.2s;
+}
+
+.main__content a:hover {
+    text-decoration: none;
+    color: #ffb700;
+    text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3);
+
+    transition: 0.2s;
+}
+
+.structure a {
+    font-size: 0.85em;
+}
+
+.contacts span {
+    font-weight: bold;
+}
+
+.zakupki,
+.plans,
+.polls,
+.contacts {
+    padding-bottom: 3em;
+}
+
+.zakupki img {
+    width: 100%;
+}
+
+.contact__me {
+}
+
+.contact__me form {
+    display: flex;
+}
+
+.contact__me h2 {
+    margin-block-start: 0;
+}
+
+.application-button button {
+    height: 100%;
+    background-color: #d08b00;
+}
+
+.application-button button:hover {
+    background-color: black;
+}
+
+.thanks__container {
+    margin: auto;
+    text-align: center;
+}
+
+.thanks__container p {
+    font-family: Arial, Helvetica, sans-serif, sans-serif;
+    color: #000000;
+    font-size: 20px;
+}
+
+.thanks__container a {
+    font-size: 20px;
+    text-decoration: none;
+    color: #0f7afc;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(15, 122, 252, 0.2);
+    transition: 0.2s;
+}
+
+.thanks__container a:hover {
+    text-decoration: none;
+    color: #fcaa00;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(15, 122, 252, 0.2);
+    transition: 0.2s;
+}
+
+.thanks__container img {
+    width: 50%;
+    padding-top: 40px;
+}
+
+footer {
+    width: 100%;
+
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+
+    background: rgb(29 29 29 / 74%);
+    border-top: 5px double #fcaa00;
+
+    height: 14vh;
+    font: bold 0.7em Arial;
+    color: grey;
+    line-height: 10px;
+}
+
+footer img {
+    width: 30%;
+}
+
+.footer-contacts p {
+    margin-block-end: 0.3em;
+    margin-block-start: 0.3em;
+}
+
+.form-control {
+    background: #8a8a8a;
+}
+
+.application-input {
+}
+
+.accordion-content {
+    display: flex;
+    align-items: center;
+}
+
+.history a {
+}
+
+.index-accordion {
+    border: 5px outset #d89400;
+}

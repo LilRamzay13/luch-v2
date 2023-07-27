@@ -55,7 +55,7 @@ export default function CustomizedAccordions() {
 
     return (
         <div className='index-accordion'>
-            <Accordion sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            <Accordion sx={{background: 'white', border: 0}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                     <Typography>Структура</Typography>
                 </AccordionSummary>
@@ -66,7 +66,7 @@ export default function CustomizedAccordions() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}}expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+            <Accordion sx={{background: 'white', border: 0}}expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                     <Typography>История</Typography>
                 </AccordionSummary>
@@ -78,7 +78,7 @@ export default function CustomizedAccordions() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}}expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+            <Accordion sx={{background: 'white', border: 0}}expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
                     <Typography>Сегодняшний день</Typography>
                 </AccordionSummary>
@@ -88,7 +88,7 @@ export default function CustomizedAccordions() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}}expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+            <Accordion sx={{background: 'white', border: 0}}expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
                     <Typography>Социальная ответственность</Typography>
                 </AccordionSummary>
@@ -98,7 +98,7 @@ export default function CustomizedAccordions() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}}expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+            <Accordion sx={{background: 'white', border: 0}}expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
                 <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
                     <Typography>Менеджмент</Typography>
                 </AccordionSummary>
@@ -108,7 +108,7 @@ export default function CustomizedAccordions() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion className="info" sx={{background: 'linear-gradient(to right bottom, #888ba8, #1b1c26)'}}expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
+            <Accordion className="info" sx={{background: 'white', border: 0}}expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
                 <AccordionSummary aria-controls="panel6d-content" id="panel6d-header">
                     <Typography>Контактная информация</Typography>
                 </AccordionSummary>
@@ -121,7 +121,7 @@ export default function CustomizedAccordions() {
                             692962, Приморский край, Партизанский район, с. Владимиро – Александровское, ул. Лазо 125</p>
 
 
-                        <p> <strong>Почтовый адрес:</strong>692962, Приморский край, Партизанский район, с. Владимиро –
+                        <p> <strong>Почтовый адрес:</strong>692962, Приморский край, Партизанский район, <br />с. Владимиро –
                             Александровское,
                             ул. Лазо 125 </p>
                         <p><strong>Контактные телефоны: </strong> 8(42365) 22-7-39</p>

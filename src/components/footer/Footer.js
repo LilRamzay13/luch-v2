@@ -13,8 +13,8 @@ const Footer = () => {
                 <form action="mail.php" method="POST">
 
                     <div className="application-input" >
-                        <TextField sx={{ mr: 2}} className="form-control" size='small' name="user_name" id="" label="Тема вопроса" variant="filled" />
-                        <TextField sx={{ mr: 2}} className="form-control" size='small' name="user_phone" id="" label="Номер телефона" variant="filled" />
+                        <TextField sx={{ mr: 2, borderBottom: '3px solid #001d3d',  borderColor: '#d08b00'}} className="form-control"  size='small' name="user_phone" id="" label="Номер телефона" variant="filled" />
+                        <TextField sx={{ mr: 2, borderBottom: '3px solid #001d3d',  borderColor: '#d08b00'}} className="form-control"  size='small' name="user_name" id="" label="Тема вопроса" variant="filled" />
 
                     </div>
 
